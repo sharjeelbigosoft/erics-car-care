@@ -19,6 +19,10 @@ const Make=require('./models/Make')
 const Model=require('./models/Model')
 const Appointment=require('./models/Appointment')
 
+app.get('/test', (req, res)=>{
+    console.log("successful");
+    res.send("Done");
+})
 
 app.get('/make', async (req, res)=>{
     console.log(req.query.year)
@@ -36,11 +40,11 @@ app.get('/model', async(req, res)=>{
 app.post('/appointment', async (req, res)=>{
     let appointment=new Appointment({
         waiting:Boolean(req.body.waiting),
-        date_time:new Date(req.body.date_time),
-        year:req.body.year,
-        location:req.body.location,
-        make:req.body.make,
-        model:req.body.model,
+        date_time:new Date(req.body.date),
+        year:req.body.Year,
+        location:req.body.place,
+        make:req.body.Make,
+        model:req.body.Model,
         fname:req.body.fname,
         lname:req.body.lname,
         email:req.body.email,
@@ -48,18 +52,24 @@ app.post('/appointment', async (req, res)=>{
         comments:req.body.comments,
     })
     console.log(await appointment.save())
-    // console.log(Boolean(req.body.waiting))
-    // console.log(new Date(req.body.date_time))
-    // console.log(req.body.year)
-    // console.log(req.body.location)
-    // console.log(req.body.make)
-    // console.log(req.body.model)
-    // console.log(req.body.fname)
-    // console.log(req.body.lname)
-    // console.log(req.body.email)
-    // console.log(req.body.number)
-    // console.log(req.body.comments)
+    console.log(Boolean(req.body.waiting))
+    console.log(new Date(req.body.date))
+    console.log(req.body.Year)
+    console.log(req.body.place)
+    console.log(req.body.Make)
+    console.log(req.body.Model)
+    console.log(req.body.fname)
+    console.log(req.body.lname)
+    console.log(req.body.email)
+    console.log(req.body.number)
+    console.log(req.body.comments)
+    console.log(req.body.services)
     res.send('Done')
+})
+
+app.all('*' , (req, res)=>{
+    console.log("Invalid request")
+    res.status(404).send()
 })
 
 module.exports = app;

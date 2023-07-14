@@ -12,6 +12,7 @@ const AppointmentSchema=new mongoose.Schema({
     email: String,
     number: {type:String},
     comments:  String,
+    services: String,
 })
 const Appointment = mongoose.model('appointment', AppointmentSchema);
 
